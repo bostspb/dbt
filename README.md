@@ -111,6 +111,27 @@
 # Section 10: Seeds and Sources
 44. Learning Objectives - Seeds and Sources
 45. Seeds and Sources Overview
+    - Seeds are local files that you upload to the data warehouse from dbt
+    - Sources is an abstraction layer on the top of your input tables
+    - Source freshness can be checked automatically
 46. Seeds
+    - Loaded a file [seed_full_moon_dates.csv](https://dbtlearn.s3.us-east-2.amazonaws.com/seed_full_moon_dates.csv)
+      at folder `seeds/`
+    - Executed command `dbt seed` 
+    - Added mart model [full_moon_reviews.sql](airbnb_project/models/mart/full_moon_reviews.sql)
+    - Executed command `dbt run`
 47. Sources
+    - Added [sources.yml](airbnb_project/models/sources.yml)
+    - Replaced inline source table names in models [src_listings.sql](airbnb_project/models/src/src_listings.sql), 
+      [src_reviews.sql](airbnb_project/models/src/src_reviews.sql) and [src_hosts.sql](airbnb_project/models/src/src_hosts.sql)
+      on refs
+    - Executed command `dbt compile`
 48. Source Freshness
+    - Added in file [sources.yml](airbnb_project/models/sources.yml) a section `freshness`
+    - Executed command `dbt source freshness` - get `WARN` alarm
+
+# Section 11: Snapshots
+49. Learning Objectives - Snapshots
+50. Snapshots Overview
+51. Creating a Snapshot
+- Quiz 7: Snapshots Quiz
