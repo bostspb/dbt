@@ -133,5 +133,28 @@
 # Section 11: Snapshots
 49. Learning Objectives - Snapshots
 50. Snapshots Overview
+    - Snapshots live in the `snapshots` folder
+    - Snapshots implement SCD type 2 
+    - Strategies:
+      - **Timestamp**: A `unique key` and an `updated_at` field is defined on the source model. 
+        These columns are used for determining changes.
+      - **Check**: Any change in a set of columns (or all columns) will be picked up as an update
 51. Creating a Snapshot
-- Quiz 7: Snapshots Quiz
+    - Added file [scd_raw_listings.sql](airbnb_project/snapshots/scd_raw_listings.sql)
+    - Executed command `dbt snapshot`
+    - Check the state of future test row: <br>
+      `SELECT * FROM AIRBNB.DEV.SCD_RAW_LISTINGS WHERE ID=3176;`
+    - Updated a record in table `raw.raw_listings`: <br>
+      `UPDATE AIRBNB.RAW.RAW_LISTINGS SET MINIMUM_NIGHTS=30, updated_at=CURRENT_TIMESTAMP() WHERE ID=3176;`
+    - Executed command `dbt snapshot`
+    - Check state of test row: <br>
+      `SELECT * FROM AIRBNB.DEV.SCD_RAW_LISTINGS WHERE ID=3176;` - we see a new row with SCD type 2 
+- **Quiz 7**: Snapshots Quiz
+
+# Section 12: Tests
+52. Learning objectives - Tests
+53. Tests Overview
+54. Generic Tests
+55. Singular Tests
+- **Assignment 2**: Create your own singular test
+- **Quiz 8**: Tests Quiz
