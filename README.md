@@ -1,6 +1,8 @@
 # Udemy: The Complete dbt Bootcamp
-> https://www.udemy.com/course/complete-dbt-data-build-tool-bootcamp-zero-to-hero-learn-dbt/
+> https://www.udemy.com/course/complete-dbt-data-build-tool-bootcamp-zero-to-hero-learn-dbt/ <br>
 > https://github.com/nordquant/complete-dbt-bootcamp-zero-to-hero/tree/main
+
+`dbt` `Snowflake` `Jinja` `SQL`
 
 
 ## Section 1: Course Introduction
@@ -84,17 +86,31 @@
 38. Learning Objectives - Materializations
 39. [Materializations Overview](039_materializations_overview.md)
 40. Model Dependencies and dbt's ref tag
+    - Jinja - https://palletsprojects.com/p/jinja/
     - Created [dim_listings_cleansed.sql](airbnb_project/models/dim/dim_listings_cleansed.sql) 
       and [dim_hosts_cleansed.sql](airbnb_project/models/dim/dim_hosts_cleansed.sql)
     - Executed command `dbt run`
-41. Table type materialization & Project-level Materialization config
+42. Table type materialization & Project-level Materialization config
     - Added type materialization by default and for models at `models/dim` folder
-      via - [dbt_project.yml](airbnb_project/dbt_project.yml), section `models`
-42. Incremental materialization
+      via [dbt_project.yml](airbnb_project/dbt_project.yml), section `models`
+43. Incremental materialization
     - Created model [fct_reviews.sql](airbnb_project/models/fct/fct_reviews.sql) with file-level materialization config
     - Executed command `dbt run` and find table `dev.fct_reviews`
     - Added a new record to the raw table: 
       `INSERT INTO "AIRBNB"."RAW"."RAW_REVIEWS" VALUES (3176, CURRENT_TIMESTAMP(), 'Zakhar', 'excellent stay!', 'positive');`
     - Executed command `dbt run` and make sure existing new row in `dev.fct_reviews`
-43. Ephemeral materialization
+44. Ephemeral materialization
+    - Added final model [dim_listings_w_hosts.sql](airbnb_project/models/dim/dim_listings_w_hosts.sql)
+    - Added type materialization `ephemeral` for models at `models/src` folder
+      via [dbt_project.yml](airbnb_project/dbt_project.yml)
+    - Dropped views `dev.src_listings`, `dev.src_reviews` and `dev.src_hosts` in Snowflake    
+    - Changed type materialization on `view` for models `dim_hosts_cleansed` and `dim_listings_cleansed` with file-level
+    - Executed command `dbt run`
 - **Quiz 6**: Quiz - Materializations
+
+# Section 10: Seeds and Sources
+44. Learning Objectives - Seeds and Sources
+45. Seeds and Sources Overview
+46. Seeds
+47. Sources
+48. Source Freshness
