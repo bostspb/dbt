@@ -24,4 +24,6 @@ models:
                       'Shared room',
                       'Hotel room']
 
-     - name: created_at
+     - name: minimum_nights
+       tests:
+         - positive_value

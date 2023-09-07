@@ -175,3 +175,29 @@
     the associated `created_at` in `dim_listings_cleansed`.
   - Solution: [tests/consistent_created_at.sql](airbnb_project/tests/consistent_created_at.sql)
 - **Quiz 8**: Tests Quiz
+
+# Section 13: Macros, Custom Tests and Packages
+56. Learning Objectives - Macros, Custom Tests and Packages
+57. Macros Overview
+    - Macros are jinja templates created in the macros folder
+    - There are many built-in macros in DBT
+    - You can use macros in model definitions and tests
+    - A special macro, called test, can be used for implementing your own generic tests
+    - dbt packages can be installed easily to get access to a plethora of macros and tests
+58. Creating our First Macro
+    - Added macros [macros/no_nulls_in_columns.sql](airbnb_project/macros/no_nulls_in_columns.sql)
+    - Added a new test [tests/no_nulls_in_dim_listings.sql](airbnb_project/tests/no_nulls_in_dim_listings.sql)
+    - Executed command `dbt test --select dim_listings_cleansed`
+59. Writing Custom Generic Tests
+    - Added macros [macros/positive_value.sql](airbnb_project/macros/no_nulls_in_columns.sql)
+    - Inserted test `positive_value` for column `minimum_nights` at [models/schema.yml](airbnb_project/models/schema.yml) 
+    - Executed command `dbt test --select dim_listings_cleansed`
+60. README updated versions of packages
+61. Installing Third-Party Packages
+    - Went to https://hub.getdbt.com
+    - Created file [packages.yml](airbnb_project/packages.yml)
+    - Executed command `dbt deps`
+    - Added new column `review_id` at model [fct_reviews](airbnb_project/models/fct/fct_reviews.sql)
+      `{{ dbt_utils.generate_surrogate_key(['listing_id', 'review_date', 'reviewer_name', 'review_text']) }} AS review_id`
+    - Executed command `dbt run --full-refresh --select fct_reviews`
+- **Quiz 9**: Macros, Custom Tests and Packages Quiz
