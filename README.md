@@ -197,7 +197,40 @@
     - Went to https://hub.getdbt.com
     - Created file [packages.yml](airbnb_project/packages.yml)
     - Executed command `dbt deps`
-    - Added new column `review_id` at model [fct_reviews](airbnb_project/models/fct/fct_reviews.sql)
+    - Added new column `review_id` at model [fct_reviews](airbnb_project/models/fct/fct_reviews.sql)<br>
       `{{ dbt_utils.generate_surrogate_key(['listing_id', 'review_date', 'reviewer_name', 'review_text']) }} AS review_id`
     - Executed command `dbt run --full-refresh --select fct_reviews`
 - **Quiz 9**: Macros, Custom Tests and Packages Quiz
+
+# Section 14: Documentation
+62. Learning Objectives - Documentation
+63. Documentation Overview
+    - Documentations can be defined two ways:
+      - In yaml files (like `schema.yml`)
+      - In standalone markdown files
+    - Dbt ships with a lightweight documentation web server
+    - For customizing the landing page, a special file, `overview.md` is used
+    - You can add your own assets (like images) to a special project folder
+64. Writing and Exploring Basic Documentation
+    - Added section `description` for some items at file [models/schema.yml](airbnb_project/models/schema.yml)
+    - Executed command `dbt docs generate`
+    - Start docs web-server `dbt docs serve`
+65. Markdown-based Docs, Custom Overview Page and Assets
+    - Added file [models/docs.md](airbnb_project/models/docs.md)
+    - Added section `description` for column `minimum_nights` at file [models/schema.yml](airbnb_project/models/schema.yml)<br>
+      `{{ doc("dim_listing_cleansed__minimum_nights") }}`
+    - Executed command `dbt docs generate`
+    - Start docs web-server `dbt docs serve`
+    - Added file [models/overview.md](airbnb_project/models/overview.md) for rewrite overview page of documentation
+    - Downloaded image [input_schema.png](https://dbtlearn.s3.us-east-2.amazonaws.com/input_schema.png) at new folder `/assets`
+    - Added section `asset-paths` at [dbt_project.yml](airbnb_project/dbt_project.yml)
+    - Set image path with `/assets/input_schema.png` in file [models/overview.md](airbnb_project/models/overview.md)
+    - Executed command `dbt docs generate`
+    - Start docs web-server `dbt docs serve`
+66. The Linage Graph (Data Flow DAG)
+    - Went on the docs web-server and saw the Linage Graph
+    - Executed command `dbt run --select src_hosts+` for running only `src_hosts` branch activities.
+- **Assignment 3**: Document the dim_hosts_cleansed table
+  - Open `schema.yml` and add basic documentation to the `dim_hosts_cleansed` model.
+  - Solution: [schema.yml](airbnb_project/models/schema.yml)
+- **Quiz 10**: Documentation quiz
