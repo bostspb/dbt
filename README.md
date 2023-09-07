@@ -154,7 +154,24 @@
 # Section 12: Tests
 52. Learning objectives - Tests
 53. Tests Overview
+    - There are two types of tests: **singular** and **generic**
+    - Singular tests are SQL queries stored in tests which are expected to return an empty resultset
+    - There are four built-in generic tests:
+      - unique
+      - not_null
+      - accepted_values
+    - Relationships
+    - You can define your own custom generic tests or import tests from dbt packages (will discuss later)
 54. Generic Tests
+    - Added file [models/schema.yml](airbnb_project/models/schema.yml) 
+    - Executed command `dbt test`
 55. Singular Tests
+    - Added file [tests/dim_listings_minumum_nights.sql](airbnb_project/tests/dim_listings_minumum_nights.sql)
+    - Executed command `dbt test`
+    - Executed command `dbt test --select dim_listings_cleansed` (restricting test execution)
 - **Assignment 2**: Create your own singular test
+  - Create a singular test in `tests/consistent_created_at.sql` that checks that there is no review date that is 
+    submitted before its listing was created: Make sure that every `review_date` in `fct_reviews` is more recent than
+    the associated `created_at` in `dim_listings_cleansed`.
+  - Solution: [tests/consistent_created_at.sql](airbnb_project/tests/consistent_created_at.sql)
 - **Quiz 8**: Tests Quiz
