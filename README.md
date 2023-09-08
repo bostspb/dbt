@@ -2,7 +2,7 @@
 > https://www.udemy.com/course/complete-dbt-data-build-tool-bootcamp-zero-to-hero-learn-dbt/ <br>
 > https://github.com/nordquant/complete-dbt-bootcamp-zero-to-hero/tree/main
 
-`dbt` `Snowflake` `Jinja` `SQL`
+`dbt` `Snowflake` `Preset` `Jinja` `SQL`
 
 
 ## Section 1: Course Introduction
@@ -234,3 +234,33 @@
   - Open `schema.yml` and add basic documentation to the `dim_hosts_cleansed` model.
   - Solution: [schema.yml](airbnb_project/models/schema.yml)
 - **Quiz 10**: Documentation quiz
+
+# Section 15: Analyses, Hooks and Exposures
+67. Learning Objectives - Analyses, Hook and Exposures
+68. Analyses
+    - Added file [analyses/full_moon_no_sleep.sql](airbnb_project/analyses/full_moon_no_sleep.sql)
+    - Executed command `dbt compile`
+    - Saw `target/compiled/airbnb_project/analyses/full_moon_no_sleep.sql`
+69. Hooks
+    - Hooks are SQLs that are executed at predefined times
+    - Hooks can be configured on the project, subfolder, or model level
+    - Hook types:
+      - **on_run_start**: executed at the start of dbt {run, seed, snapshot}
+      - **on_run_end**: executed at the end of dbt {run, seed, snapshot}
+      - **pre-hook**: executed before a model/seed/snapshot is built
+      - **post-hook**: executed after a model/seed/snapshot is built
+    - Created the `REPORTER` role and `PRESET` user in Snowflake 
+      via [sql](course_resources/create_reporter_role_and_preset_user_in_snowflake.sql)
+    - Set grants on `SELECT` to role `REPORTER` via post-hook at [dbt_project.yml](airbnb_project/dbt_project.yml)
+    - Executed command `dbt run`
+70. Setting up a BI Dashboard in Snowflake and Preset
+    - Went to [preset.io](https://preset.io/)
+      - singed up
+      - created connection to Snowflake with `REPORTER` user
+      - created dataset with mart `full_moon_reviews`
+      - created a bar chart and then a simple dashboard
+71. Exposures
+    - Added file [models/dashboard.yml](airbnb_project/models/dashboard.yml)
+    - Executed command `dbt docs generate`
+    - Start docs web-server `dbt docs serve`
+- **Quiz 11**: Hooks Quiz

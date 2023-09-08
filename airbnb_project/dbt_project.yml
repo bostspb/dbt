@@ -35,6 +35,8 @@ models:
   airbnb_project:
     # default materialization type
     +materialized: view
+    +post-hook:
+      - "GRANT SELECT ON {{ this }} TO ROLE REPORTER;"
     dim:
       +materialized: table
     src:
