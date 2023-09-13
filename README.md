@@ -264,3 +264,41 @@
     - Executed command `dbt docs generate`
     - Start docs web-server `dbt docs serve`
 - **Quiz 11**: Hooks Quiz
+
+# Section 16: dbt Hero
+72. Welcome to Hero
+73. Have your say in the course's roadmap
+
+# Section 17: Debugging Tests and Testing with dbt-expectations
+74. A note on the dbt-expectations setup
+75. Great Expectations Overview
+    - [Docs](https://docs.greatexpectations.io/docs/)
+    - [Project on GitHub](https://github.com/great-expectations/great_expectations)
+    - [Package `dbt-expectations`](https://github.com/calogica/dbt-expectations)
+76. Comparing row counts between models
+    - Added new test `expect_table_row_count_to_equal_other_table` for model `dim_listings_w_hosts` 
+      at file [models/schema.yml](airbnb_project/models/schema.yml)
+    - Executed command `dbt test --select dim_listings_w_hosts`
+77. Looking for outliers in your data
+    - Added new test `expect_column_quantile_values_to_be_between` for model `dim_listings_w_hosts` (column level) 
+      at file [models/schema.yml](airbnb_project/models/schema.yml)
+    - Executed command `dbt test --select dim_listings_w_hosts`
+78. Implementing test warnings for extremal items
+    - Added new test `expect_column_max_to_be_between` with max value 5000 at 
+      file [models/schema.yml](airbnb_project/models/schema.yml)
+    - Executed command `dbt test --select dim_listings_w_hosts` and new test became FAIL state
+    - Added at test `expect_column_max_to_be_between` config to convert FAIL to WARNING
+    - Executed command `dbt test --select dim_listings_w_hosts` and instead of a FAIL we see a WARNING
+79. Validating column types
+    - Added new test `expect_column_values_to_be_of_type` at file [models/schema.yml](airbnb_project/models/schema.yml)
+    - Executed command `dbt test --select dim_listings_w_hosts`
+80. Monitoring categorical variables in the source data
+    - Added test `expect_column_distinct_count_to_equal` at source file [sources.yml](airbnb_project/models/sources.yml)
+    - Executed command `dbt test --select source:airbnb.listings`
+81. Debugging dbt tests and Working with regular expressions
+    - Added test `expect_column_values_to_match_regex` at source file [sources.yml](airbnb_project/models/sources.yml)
+    - Executed command `dbt test --select source:airbnb.listings` and saw FAIL
+    - NOT BEST PRACTICE to debug: `dbt --debug test --select source:airbnb.listings`
+    - BEST PRACTICE for debugging is to inspect a compiled code at `target` folder
+- **Quiz 12**: dbt-expectations and test debugging quiz
+- **Assignment 4**: Course Feedback and Moving on
