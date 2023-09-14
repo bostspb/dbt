@@ -302,3 +302,13 @@
     - BEST PRACTICE for debugging is to inspect a compiled code at `target` folder
 - **Quiz 12**: dbt-expectations and test debugging quiz
 - **Assignment 4**: Course Feedback and Moving on
+
+# Section 18: Best Practices for Introducing and Using dbt in your Company
+82. An interview with the Data Utilization Head of the Vienna Insurance Group
+
+# Section 19: dbt Certification Exam Preparation Guide
+83. How to prepare for the certification exam? An interview with Muizz Lateef
+84. Quiz 13: Certification Preparation Quiz
+
+# Section 20: Supplementary Materials
+84. Supplementary Material - Installing dbt on Windows with Windows Linux Filesystem
